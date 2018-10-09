@@ -1,0 +1,45 @@
+﻿<div id="genresView">
+    <ul class="nav nav-tabs">
+        @foreach (var genre in Model.Genres)
+        {
+            <li class="nav-item">
+                <a class="nav-link" href="#" v-on:click="getGenreMovies(@genre.Id)">
+                    @genre.Name
+                </a>
+            </li>
+        }
+    </ul>
+    <div class="tab-content" id="genreMovieList">
+
+    </div>
+</div>
+
+@section scripts {
+
+<script type="text/javascript">
+
+    var vm=new Vue({
+        el:'#genresView',
+        methods:{
+            getGenreMovies: function(genreId){
+                $.ajax({
+                    method:'get',
+                    //url: 'https://api.themoviedb.org/3/discover/movie?api_key=26cf162ffbd66eae91c236838e871b6f&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres='+genreId,
+                    url:'/Genre/Movies/'+genreId,
+                    success: function(data){
+                        $('#genreMovieList').html(data);
+                        console.log(data);
+                    },
+                    error: function(x,y,z){
+                        console.error(x);
+                        console.error(y);
+                        console.error(z);
+                    }
+                });
+            }
+        }
+    });
+
+</script>
+}
+

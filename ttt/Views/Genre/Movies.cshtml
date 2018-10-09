@@ -1,0 +1,40 @@
+﻿@using ttt
+@model ttt.Models.DiscoverMovie
+
+<style>
+    .checked {
+        color: orange;
+    }
+
+</style>
+
+<div class="row">
+    @foreach (var movie in Model.Results)
+    {
+        <div class="col-md-3">
+            <div class="card bg-light">
+                <img class="card-img-top" src="http://image.tmdb.org/t/p/w342/@movie.Poster_Path" alt="@movie.Title" >
+                <div class="card-body">
+                    <h5 class="card-title border-bottom pb-3">@movie.Title
+                        <span href="#" class="float-right d-inline-flex">
+                            @Html.RatingStars(movie.Vote_Average)
+                        <!--
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+<span class="fa fa-star"></span>
+    -->
+                        </span>
+                    </h5>
+                    <p class="card-text">@movie.Overview</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
